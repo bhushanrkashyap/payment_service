@@ -17,9 +17,7 @@ RUN apk add --no-cache curl && \
     addgroup -S -g 1000 appgroup && \
     adduser -S -u 1000 -G appgroup appuser
 
-COPY --from=builder /app/target/payment_service-0.0.1-SNAPSHOT.jar app.jar
-
-RUN chown -R appuser:appgroup /app
+COPY --chown=appuser:appgroup --from=builder /app/target/payment_service-0.0.1-SNAPSHOT.jar app.jar
 
 USER appuser
 
